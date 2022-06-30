@@ -1,0 +1,44 @@
+<section class="page-title-section overlay">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="notice.html">{{subject.Name}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+          <div class="countdown">
+              {{counter | secondsToDateTime | date:'mm:ss'}}
+			  <pre class="correct text-success">Câu đúng {{marks}} / {{maxSize}} câu</pre>
+          </div>
+          <ul class="card card-question"  ng-repeat="item in filteredItems">
+              <li style="background-color: orange;" class="card-header">Câu {{curPage}}: {{item.Text}}</li>
+              <li class="card-body">
+                  <div class="input-group" ng-repeat="a in item.Answers" >
+                      <label >
+                          <input ng-disabled="item.checked" id="checked{{a.Id}}" ng-click="chooseAnswer(a.Id, curPage, item.Id)" type="radio" name="answer" ng-model="answer"> {{a.Text}}
+                      </label>
+                  </div>
+              </li>
+          </ul>
+          <div style="background-color: orange;" class="card-question-footer row">
+              <span class="col-4">Câu hỏi: {{curPage}} / {{maxSize}}</span>
+              <div class="col-8"
+                    data-pagination=""
+                    data-num-pages="numOfPages()"
+                    data-current-page="curPage"
+                    data-max-size="maxSize"
+                    data-boundary-links="true">
+              </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</section>

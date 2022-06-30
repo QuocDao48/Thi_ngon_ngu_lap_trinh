@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!--    <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />-->
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+</head>
+<h1 style="color: green;" ;>GeeksforGeeks</h1>
+<body ng-controller="ListController">
+    <ul ng-repeat="item in filteredItems">
+        <li>{{item.name}}</li>
+    </ul>
+<div data-pagination=""
+     data-num-pages="numOfPages()"
+     data-current-page="curPage"
+     data-max-size="maxSize"
+     data-boundary-links="true">
+</div>
+</body>
+</html>
+<script>
+    // Write Javascript code here
+    var app = angular.module('myApp', ['ui.bootstrap']);
+    app.controller('ListController', function($scope){
+        $scope.curPage = 1,
+            $scope.itemsPerPage = 1,
+            $scope.maxSize = 10;
+        this.items = itemsDetails;
+        $scope.numOfPages = function () {
+            return Math.ceil(itemsDetails.length / $scope.itemsPerPage);
+
+        };
+        $scope.$watch('curPage + numPerPage', function() {
+            var begin = (($scope.curPage - 1) * $scope.itemsPerPage),
+                end = begin + $scope.itemsPerPage;
+
+            $scope.filteredItems = itemsDetails.slice(begin, end);
+        });
+    });
+    var itemsDetails = [
+        {"name":"Bell","id":"K0H 2V5"},
+        {"name":"Octavius","id":"X1E 6J0"},
+        {"name":"Alexis","id":"N6E 1L6"},
+        {"name":"Colton","id":"U4O 1H4"},
+        {"name":"Abdul","id":"O9Z 2Q8"},
+        {"name":"Ian","id":"Q7W 8M4"},
+        {"name":"Eden","id":"H8X 5E0"},
+        {"name":"Britanney","id":"I1Q 1O1"},
+        {"name":"Ulric","id":"K5J 1T0"},
+        {"name":"Geraldine","id":"O9K 2M3"}
+    ];
+</script>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html ng-app="plunker">
+
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div ng-controller="PaginationDemoCtrl">
+    <table class="table">
+        {{currentPage}}
+        <tr ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+            <td>{{row.name}}</td>
+        </tr>
+    </table>
+    <pagination total-items="totalItems" ng-model="currentPage"
+                ng-change="pageChanged()"
+                class="pagination-sm" items-per-page="itemsPerPage"></pagination>
+    <pre>Page: {{currentPage}} / {{totalItems}}</pre>
+</div>
+<script>
+    angular.module('plunker', ['ui.bootstrap']);
+    var PaginationDemoCtrl = function ($scope) {
+        $scope.data = [
+            {"name":"Bell","id":"K0H 2V5"},
+            {"name":"Octavius","id":"X1E 6J0"},
+            {"name":"Alexis","id":"N6E 1L6"},
+            {"name":"Colton","id":"U4O 1H4"},
+            {"name":"Abdul","id":"O9Z 2Q8"},
+            {"name":"Ian","id":"Q7W 8M4"},
+            {"name":"Eden","id":"H8X 5E0"},
+            {"name":"Britanney","id":"I1Q 1O1"},
+            {"name":"Ulric","id":"K5J 1T0"},
+            {"name":"Geraldine","id":"O9K 2M3"}
+            ];
+        $scope.viewby = 1;
+        $scope.totalItems = $scope.data.length;
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = $scope.viewby;
+        // $scope.maxSize = 5; //Number of pager buttons to show
+
+        // $scope.setPage = function (pageNo) {
+        //     $scope.currentPage = pageNo;
+        // };
+
+        // $scope.pageChanged = function() {
+        //     console.log('Page changed to: ' + $scope.currentPage);
+        // };
+
+        // $scope.setItemsPerPage = function(num) {
+        //     $scope.itemsPerPage = num;
+        //     $scope.currentPage = 1; //reset to first page
+        // }
+    };
+</script>
+</body>
+
+</html>
